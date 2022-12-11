@@ -1,0 +1,3 @@
+data set : MNIST data set
+aim: recognise and classify handwritten images
+training an ANN from scratch, with only numpy
