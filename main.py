@@ -8,6 +8,7 @@ def ReLU(x):
     #if x>0 return x
     return np.maximum(0,x)
 
+#returns value btw 0 and 1
 def softmax(x) :
     exp = np.exp(x - np.max(x))
     return exp / exp.sum(axis=0)
@@ -60,14 +61,22 @@ def train(X,Y, epochs, lr) :
 
 
         #### back propagation #################################
+        ### the loss function and the loss ########
+        #cost function: MSE
+            #J = (predicted_output - Y)^2   #represented as E
+
+        #error E
+        dZ_output = 2*(output_activations - expected_output)  #dE/dZ_output
+
         #calculate the gradient
         #output layer
-        dZ_output = (output_activations - expected_output)  #error
         dW_output = np.dot(dZ_output , hidden_activations.T) / m
         dB_output = np.sum(dZ_output, 1)/m
 
         #hidden_layer
-        dZ_hidden = np.dot(output_weights.T , dZ_output)*ReLU_derivative(hidden_z) #hidden layer error
+        #hidden layer error
+        dZ_hidden = np.dot(output_weights.T , dZ_output)*ReLU_derivative(hidden_z) #dE/dZ_hidden
+
         dW_hidden = np.dot(dZ_hidden , X.T) / m
         dB_hidden = np.sum(dZ_hidden, 1)/m
 
@@ -219,5 +228,12 @@ hw, hb, ow, ob = train(X_train, Y_train, epochs , lr)
 accuracy = test(X_test, Y_test)
 print("\nAccuracy: ", accuracy)
 
+########## classifying custom image #####################
+#open image
+#img = cv2.imread('C:\\Users\\Samruddhi\\Desktop\\Neural Networks\\MNIST Handwritten digit classification\\custom data\\two.jpeg', 0)
+#img[r][c] = grayscale value of pixel at that index
 
+#pre-process the img
+#img = preprocess_image(img)
+#print(classify(hw, hb, ow, ob, img))
 
