@@ -70,14 +70,14 @@ def train(X,Y, epochs, lr) :
 
         #calculate the gradient
         #output layer
-        dW_output = np.dot(dZ_output , hidden_activations.T) / m
+        dW_output = np.dot(dZ_output , hidden_activations.T) /m
         dB_output = np.sum(dZ_output, 1)/m
 
         #hidden_layer
         #hidden layer error
         dZ_hidden = np.dot(output_weights.T , dZ_output)*ReLU_derivative(hidden_z) #dE/dZ_hidden
 
-        dW_hidden = np.dot(dZ_hidden , X.T) / m
+        dW_hidden = np.dot(dZ_hidden , X.T) /m
         dB_hidden = np.sum(dZ_hidden, 1)/m
 
 
@@ -189,7 +189,7 @@ def preprocess_image(img) :
 #######################################################################
 
 ##### dataset ############################################
-data_df = pd.read_csv("C:\\Users\\Samruddhi\\Desktop\\Neural Networks\\MNIST Handwritten digit classification\\archive\\mnist_train.csv")
+data_df = pd.read_csv("C:\\Users\\Samruddhi\\Desktop\\Neural Networks\\datasets\\MNIST data\\mnist_train.csv")
 
 data = np.array(data_df) #converting df to numpy array
     #60,000 rows  #785 columns
